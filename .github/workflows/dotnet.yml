@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: Windows-latest
     steps:
     - uses: actions/checkout@v2
     - name: Setup .NET
@@ -21,7 +21,7 @@ jobs:
       run: dotnet build --configuration Release
   archive:
      needs: build
-     runs-on: ubuntu-latest
+     runs-on: Windows-latest
      name: Archive Action
      steps:
      - name: action-build-zip
@@ -33,7 +33,7 @@ jobs:
           filename: 'funcex1-release.zip'
   publish:
       needs: archive
-      runs-on: ubuntu-latest
+      runs-on: Windows-latest
       steps:
       - name: Azure Blob Storage Upload
           # You may pin to the exact commit or the version.
