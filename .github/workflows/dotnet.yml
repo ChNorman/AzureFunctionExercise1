@@ -25,8 +25,9 @@ jobs:
       run: dotnet build --no-restore --configuration Release
     
     - name: Archive Action
-      uses: byteever/action-build-zip@1
+      uses: actions/checkout@master
       with:
+          type: 'zip'
           # See byteever/action-zip README.md for more info
           filename: 'funcex1-release.zip'
     
