@@ -8,7 +8,8 @@ on:
 
 jobs:
   build_and_Deploy:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
+    
     steps:
     - uses: actions/checkout@v2
     - name: Setup .NET
@@ -19,13 +20,16 @@ jobs:
           5.0.x
     - name: Restore dependencies
       run: dotnet restore
+    
     - name: Build
       run: dotnet build --no-restore --configuration Release
+    
     - name: Archive Action
       uses: byteever/action-build-zip@1
       with:
           # See byteever/action-zip README.md for more info
           filename: 'funcex1-release.zip'
+    
     - name: Azure Blob Storage Upload
           # You may pin to the exact commit or the version.
           # uses: bacongobbler/azure-blob-storage-upload@779a18b594a1a7cf5412645e06c856324a8b01e5
