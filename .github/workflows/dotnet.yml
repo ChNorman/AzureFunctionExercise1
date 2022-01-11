@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: Windows-latest
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Setup .NET
@@ -21,27 +21,16 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore --configuration Release
-  archive:
-     needs: build
-     runs-on: Windows-latest
-     name: Archive Action
-     steps:
-     - name: action-build-zip
-        # You may pin to the exact commit or the version.
-        # uses: byteever/action-build-zip@23d77e1778849e35de1b4e9dbb16d4b64a4714e6
-       uses: byteever/action-build-zip@1
-       with:
+    - name: Archive Action
+      uses: byteever/action-build-zip@1
+      with:
           # See byteever/action-zip README.md for more info
           filename: 'funcex1-release.zip'
-  publish:
-      needs: archive
-      runs-on: Windows-latest
-      steps:
-      - name: Azure Blob Storage Upload
+    - name: Azure Blob Storage Upload
           # You may pin to the exact commit or the version.
           # uses: bacongobbler/azure-blob-storage-upload@779a18b594a1a7cf5412645e06c856324a8b01e5
-        uses: bacongobbler/azure-blob-storage-upload@v1.1.1
-        with:
+      uses: bacongobbler/azure-blob-storage-upload@v1.1.1
+      with:
         # The connection string for the storage account
           connection_string: $({ secrest.ConnenctionString })
         # The name of the storage account container these assets will be uploaded to
