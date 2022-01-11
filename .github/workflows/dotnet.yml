@@ -36,7 +36,7 @@ jobs:
       uses: bacongobbler/azure-blob-storage-upload@v1.2.0
       with:
         # The connection string for the storage account
-          connection_string: $({ secrets.CONNECTIONSTRING })
+          connection_string: ${{ secrets.ConnectionString }}
         # The name of the storage account container these assets will be uploaded to
           container_name: functioncodepackages
         # The name of the directory you want to upload
