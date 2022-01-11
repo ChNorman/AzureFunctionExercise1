@@ -22,7 +22,9 @@ jobs:
       run: dotnet restore
     
     - name: Build
-      run: dotnet build --no-restore  --output ${{ env.GITHUB_WORKSPACE }}'/publish' --configuration Release
+      run: 
+        mkdir ${{ env.GITHUB_WORKSPACE }}'/publish'
+        dotnet build --no-restore  --output ${{ env.GITHUB_WORKSPACE }}'/publish' --configuration Release
     
     - name: Archive Action
       uses: actions/checkout@master
