@@ -31,9 +31,7 @@ jobs:
           filename: 'funcex1-release.zip'
     
     - name: Azure Blob Storage Upload
-          # You may pin to the exact commit or the version.
-          # uses: bacongobbler/azure-blob-storage-upload@779a18b594a1a7cf5412645e06c856324a8b01e5
-      uses: bacongobbler/azure-blob-storage-upload@v1.2.0
+      uses: LanceMcCarthy/Action-AzureBlobUpload@v1.10.0
       with:
         # The connection string for the storage account
           connection_string: ${{ secrets.ConnectionString }}
