@@ -11,7 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - run: sudo mkdir "${{ env.GITHUB_WORKSPACE }}/publish"
     - uses: actions/checkout@v2
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
@@ -23,14 +22,14 @@ jobs:
       run: dotnet restore
     
     - name: Build
-      run: dotnet build --no-restore  --output ${{ env.GITHUB_WORKSPACE }}'/publish' --configuration Release
+      run: dotnet build --no-restore  --configuration Release
     
     - name: Archive Action
       uses: actions/checkout@master
       with:
           type: 'zip'
-          path: ${{ env.GITHUB_WORKSPACE }}'/publish'
-          directory: ${{ env.GITHUB_WORKSPACE }}'/publish'
+          path: '/home/runner/work/AzureFunctionExercise1/AzureFunctionExercise1/bin/Release/net5.0/'
+          directory: '/home/runner/work/AzureFunctionExercise1/AzureFunctionExercise1/bin/Release/net5.0/'
           filename: 'funcex1-release.zip'
     
     - name: Azure Blob Storage Upload
@@ -41,7 +40,7 @@ jobs:
         # The name of the storage account container these assets will be uploaded to
           container_name: functioncodepackages
         # The name of the directory you want to upload
-          source_folder: ${{ env.GITHUB_WORKSPACE }}'/publish/funcex1-release.zip'
+          source_folder: '/home/runner/work/AzureFunctionExercise1/AzureFunctionExercise1/bin/Release/net5.0/funcex1-release.zip'
           fail_if_source_empty: true
           is_recursive: false
         
